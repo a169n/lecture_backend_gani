@@ -17,7 +17,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URL=mongodb://mongo:27017/lecture
+      - MONGO_URL=mongodb+srv://a1byn:20052018@cluster0.5gexz.mongodb.net/leccture8?appName=Cluster0
     ports:
       - "3000:3000"
 
