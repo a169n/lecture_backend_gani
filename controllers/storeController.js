@@ -33,6 +33,15 @@ const getStoresByUser = async (req, res) => {
   }
 };
 
+const getAllStores = async (req, res) => {
+  try {
+    const stores = await Store.find();
+    res.json(stores);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 const getStoreById = async (req, res) => {
   try {
     const store = await Store.findById(req.params.id).populate('user');
@@ -46,8 +55,40 @@ const getStoreById = async (req, res) => {
   }
 };
 
+const deleteStore = async (req, res) => {
+  try {
+    const store = await Store.findByIdAndDelete(req.params.id);
+    res.json(store);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const updateStore = async (req, res) => {
+  try {
+    const store = await Store.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(store);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const updateStorePutRequest = async (req, res) => {
+  try {
+    const store = await Store.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(store);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
   createStore,
   getStoresByUser,
-  getStoreById
+  getStoreById,
+  getAllStores,
+  deleteStore,
+  updateStore,
+  updateStorePutRequest
 };

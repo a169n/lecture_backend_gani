@@ -11,7 +11,7 @@ const createOrganization = async (req, res) => {
 
 const getOrganizations = async (req, res) => {
   try {
-    const organizations = await Organization.find().populate('users');
+    const organizations = await Organization.find();
     res.json(organizations);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -46,9 +46,19 @@ const updateOrganization = async (req, res) => {
   }
 };
 
+const deleteOrganization = async (req, res) => {
+  try {
+    const organization = await Organization.findByIdAndDelete(req.params.id);
+    res.json(organization);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
   createOrganization,
   getOrganizations,
   getOrganizationById,
-  updateOrganization
+  updateOrganization,
+  deleteOrganization
 };
